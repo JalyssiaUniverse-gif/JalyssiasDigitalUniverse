@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Jalyssia's Digital Universe</title>
+
+<style>
+
+*{
+  /* HIDDEN GALLERY */
+
+.hidden-gallery{
+
+  display:none;
+
+  grid-column:1 / -1;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+  gap:25px;
+
+  margin-top:20px;
+
+}
+
+/* PLUS CARD */
+
+.plus-card{
+
+  height:450px;
+
+  border-radius:25px;
+
+  background:
+    rgba(255,255,255,0.18);
+
+  backdrop-filter:blur(10px);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-size:100px;
+
+  cursor:pointer;
+
+  transition:0.3s;
+}
+
+.plus-card:hover{
+
+  transform:scale(1.03);
+
+  background:
+    rgba(255,255,255,0.28);
+
+}
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family: 'Trebuchet MS', sans-serif;
+  overflow-x:hidden;
+  color:#fff;
+  background:
+    linear-gradient(
+      135deg,
+      #f6d6bd,
+      #e8c7b7,
+      #cdb4db,
+      #a2d2ff
+    );
+
+  background-size:400% 400%;
+  animation:bgShift 15s ease infinite;
+  min-height:100vh;
+}
+
+/* BACKGROUND ANIMATION */
+
+@keyframes bgShift{
+
+  0%{
+    background-position:0% 50%;
+  }
+
+  50%{
+    background-position:100% 50%;
+  }
+
+  100%{
+    background-position:0% 50%;
+  }
+
+}
+
+/* FLOATING SPARKLES */
+
+.sparkle{
+  position:fixed;
+  width:6px;
+  height:6px;
+  background:white;
+  border-radius:50%;
+  opacity:0.7;
+  animation:floatSparkle linear infinite;
+  z-index:-1;
+}
+
+@keyframes floatSparkle{
+
+  from{
+    transform:translateY(100vh) scale(0.5);
+  }
+
+  to{
+    transform:translateY(-100vh) scale(1.5);
+  }
+
+}
+
+/* FALLING STARS */
+
+.star{
+  position:fixed;
+  width:2px;
+  height:120px;
+  background:
+    linear-gradient(
+      transparent,
+      rgba(255,255,255,0.8)
+    );
+
+  transform:rotate(45deg);
+  animation:fallStar linear infinite;
+  opacity:0.6;
+  z-index:-1;
+}
+
+@keyframes fallStar{
+
+  from{
+    transform:translateX(0) translateY(-200px) rotate(45deg);
+  }
+
+  to{
+    transform:translateX(-800px) translateY(800px) rotate(45deg);
+  }
+
+}
+
+/* NAV */
+
+nav{
+  position:sticky;
+  top:0;
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(15px);
+  padding:20px;
+  z-index:999;
+}
+
+.nav-wrap{
+  width:90%;
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:28px;
+  font-weight:bold;
+  color:#fff;
+  text-shadow:0 0 10px rgba(255,255,255,0.4);
+}
+
+.nav-links{
+  display:flex;
+  gap:20px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:white;
+  transition:0.3s;
+}
+
+.nav-links a:hover{
+  transform:translateY(-2px);
+  opacity:0.8;
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:100px 20px;
+}
+
+.hero h1{
+  font-size:72px;
+  margin-bottom:20px;
+  text-shadow:0 5px 20px rgba(0,0,0,0.25);
+}
+
+.hero p{
+  font-size:22px;
+  max-width:700px;
+  margin:auto;
+  margin-bottom:35px;
+}
+
+.hero button{
+  background:white;
+  color:#7b5ea7;
+  border:none;
+  padding:16px 32px;
+  border-radius:40px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.hero button:hover{
+  transform:scale(1.05);
+}
+
+/* SECTION */
+
+section{
+  padding:100px 20px;
+}
+
+.container{
+  width:90%;
+  max-width:1200px;
+  margin:auto;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:60px;
+}
+
+.section-title h2{
+  font-size:50px;
+  margin-bottom:10px;
+}
+
+/* CARDS */
+
+.card{
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(15px);
+  padding:35px;
+  border-radius:30px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.15);
+  margin-bottom:30px;
+}
+
+/* GALLERY */
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+}
+
+.gallery img{
+  width:100%;
+  height:450px;
+  object-fit:cover;
+  border-radius:25px;
+  transition:0.4s;
+}
+
+.gallery img:hover{
+  transform:scale(1.03);
+}
+
+/* MOOD */
+
+.mood-box{
+  text-align:center;
+}
+
+#moodDisplay{
+  font-size:28px;
+  margin-top:25px;
+}
+
+/* OBSESSIONS */
+
+.obsession-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:15px;
+  margin-top:25px;
+}
+
+.obsession-item{
+  background:white;
+  color:#7b5ea7;
+  padding:12px 18px;
+  border-radius:30px;
+  font-weight:bold;
+}
+
+/* DIARY */
+
+textarea{
+  width:100%;
+  min-height:220px;
+  border:none;
+  border-radius:20px;
+  padding:20px;
+  font-size:16px;
+  margin-bottom:20px;
+}
+
+button{
+  border:none;
+  cursor:pointer;
+}
+
+.action-btn{
+  background:white;
+  color:#7b5ea7;
+  padding:14px 24px;
+  border-radius:30px;
+  margin-right:10px;
+  margin-bottom:10px;
+  font-weight:bold;
+}
+
+.category-buttons{
+  margin-bottom:20px;
+}
+
+.category-buttons button{
+  margin:5px;
+  background:#ffffff;
+  color:#7b5ea7;
+  padding:10px 16px;
+  border-radius:20px;
+}
+
+/* ENTRIES */
+
+.entry{
+  background:rgba(255,255,255,0.12);
+  padding:20px;
+  border-radius:20px;
+  margin-top:15px;
+}
+
+/* SECRET PAGE */
+
+.secret-page{
+  display:none;
+  margin-top:30px;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  padding:40px;
+  opacity:0.8;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .hero h1{
+    font-size:46px;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SPARKLES -->
+
+<script>
+
+for(let i = 0; i < 40; i++){
+
+  const sparkle = document.createElement("div");
+
+  sparkle.classList.add("sparkle");
+
+  sparkle.style.left = Math.random() * 100 + "vw";
+
+  sparkle.style.animationDuration =
+    (5 + Math.random() * 10) + "s";
+
+  sparkle.style.opacity = Math.random();
+
+  document.body.appendChild(sparkle);
+
+}
+
+for(let i = 0; i < 12; i++){
+
+  const star = document.createElement("div");
+
+  star.classList.add("star");
+
+  star.style.left = Math.random() * 100 + "vw";
+
+  star.style.animationDuration =
+    (4 + Math.random() * 5) + "s";
+
+  star.style.animationDelay =
+    Math.random() * 5 + "s";
+
+  document.body.appendChild(star);
+
+}
+
+</script>
+
+<!-- NAV -->
+
+<nav>
+
+  <div class="nav-wrap">
+
+    <div class="logo">
+      ✴ Jalyssia's Digital Universe ✴
+    </div>
+
+    <div class="nav-links">
+      <a href="#gallery">Photos</a>
+      <a href="#mood">Mood</a>
+      <a href="#diary">Diary</a>
+      <a href="#vault">Vault</a>
+    </div>
+
+  </div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div>
+
+    <h1>
+      My Cozy Little Internet Universe
+    </h1>
+
+    <p>
+      My soft dreamscape filled with memories,
+      playlists, secrets, chaos, growth,
+      screenshots, and emotionally important lore.
+    </p>
+
+ <div style="margin-top:30px;">
+
+  <button onclick="playMusic()">
+    🎵 Start The Vibes
+  </button>
+
+  <br><br>
+
+  <label>
+    🎧 Volume 🎧
+  </label>
+
+  <br>
+
+  <input
+    type="range"
+    min="0"
+    max="1"
+    step="0.01"
+    value="0.4"
+    id="volumeSlider"
+    style="
+      width:220px;
+      accent-color:#cdb4db;
+    "
+  >
+
+</div>
+
+</section>
+
+<!-- MUSIC -->
+
+<audio id="bgMusic"></audio>
+
+<!-- GALLERY -->
+
+<section id="gallery">
+
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Memory Gallery 📸</h2>
+    </div>
+
+<div class="gallery">
+
+  <!-- ALWAYS VISIBLE -->
+
+  <img src="1.jpeg">
+
+  <img src="2.jpeg">
+
+  <img src="3.JPG">
+
+  <!-- HIDDEN PHOTOS -->
+
+  <div id="extraPhotos" class="hidden-gallery">
+
+    <img src="4.jpeg">
+
+    <img src="5.jpeg">
+
+    <img src="6.jpeg">
+
+  </div>
+
+  <!-- PLUS BUTTON -->
+
+ <div class="plus-card" onclick="toggleGallery()">
+
+  <span id="plusSymbol">Open The Memory Vault 💖</span>
+
+</div>
+
+
+  </div>
+
+</section>
+
+<!-- MOOD -->
+
+<section id="mood">
+
+  <div class="container">
+
+    <div class="card mood-box">
+
+      <h2>Mood Of The Day ✨</h2>
+
+      <div id="moodDisplay">
+        sleepy but iconic
+      </div>
+
+      <br>
+
+      <button class="action-btn" onclick="newMood()">
+        Randomize Mood
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- OBSESSIONS -->
+
+<section>
+
+  <div class="container">
+
+    <div class="card">
+
+      <h2>Currently Obsessed With 💖</h2>
+
+      <div class="obsession-list">
+
+        <div class="obsession-item">
+          ☁ oversized hoodies
+        </div>
+
+        <div class="obsession-item">
+          🎧 vibey playlists
+        </div>
+
+        <div class="obsession-item">
+          ✨ soft glam
+        </div>
+
+        <div class="obsession-item">
+          📖 late-night journaling
+        </div>
+
+        <div class="obsession-item">
+          🌙 healing era
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- DIARY -->
+
+<section id="diary">
+
+  <div class="container">
+
+    <div class="card">
+
+      <h2>Digital Diary 💭</h2>
+
+      <br>
+
+      <div class="category-buttons">
+
+        <button onclick="setCategory('thoughts')">
+          Thoughts
+        </button>
+
+        <button onclick="setCategory('tea')">
+          Tea ☕
+        </button>
+
+        <button onclick="setCategory('dreams')">
+          Dreams
+        </button>
+
+        <button onclick="setCategory('life')">
+          Life
+        </button>
+
+      </div>
+
+      <textarea
+        id="diaryInput"
+        placeholder="Write something iconic..."
+      ></textarea>
+
+      <button class="action-btn" onclick="saveEntry()">
+        Save Entry
+      </button>
+
+      <button class="action-btn" onclick="viewEntries()">
+        View Entries
+      </button>
+
+      <div id="entriesContainer"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SECRET VAULT -->
+
+<section id="vault">
+
+  <div class="container">
+
+    <div class="card">
+
+      <h2>🔒 Secret Vault</h2>
+
+      <br>
+
+      <input
+        type="password"
+        id="vaultPassword"
+        placeholder="Enter password..."
+        style="
+          width:100%;
+          padding:16px;
+          border:none;
+          border-radius:15px;
+          margin-bottom:20px;
+        "
+      >
+
+      <button class="action-btn" onclick="unlockVault()">
+        Unlock
+      </button>
+
+  <div class="secret-page" id="secretPage">
+
+  <h3>
+    🌙 Welcome To The Inner Sanctum
+  </h3>
+
+  <br>
+
+  <p>
+    Authorized access granted.
+    The vault now contains emotionally significant artifacts.
+  </p>
+
+  <br><br>
+
+  <!-- SECRET NOTES -->
+
+  <h3>
+    💭 Secret Thoughts
+  </h3>
+
+  <textarea
+    id="vaultNotes"
+    placeholder="Write secret thoughts, plans, tea, villain monologues..."
+    style="
+      width:100%;
+      min-height:180px;
+      padding:20px;
+      border:none;
+      border-radius:20px;
+      margin-top:15px;
+      margin-bottom:20px;
+    "
+  ></textarea>
+
+  <button class="action-btn" onclick="saveVaultNotes()">
+    Save Vault Notes
+  </button>
+
+  <br><br>
+
+  <!-- SECRET PHOTOS -->
+
+  <h3>
+    📸 Hidden Memories
+  </h3>
+
+  <div class="gallery">
+
+    <img src="sp1.jpeg">
+
+    <img src="sp2.jpeg">
+
+  </div>
+
+  <br><br>
+
+  <!-- SECRET PLAYLIST -->
+
+  <h3>
+    🎧 Vault Playlist
+  </h3>
+
+  <ul style="line-height:2;">
+
+    <li>✨ late night drives</li>
+
+    <li>🌙 healing era soundtrack</li>
+
+    <li>💅 dramatic window-staring music</li>
+
+    <li>☁ emotionally expensive playlists</li>
+
+  </ul>
+
+</div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+
+  Powered by playlists, emotional intelligence,
+  and tiny sparkly internet magic ✨
+
+</footer>
+
+<script>
+
+/* MUSIC */
+
+const playlist = [
+  
+"close.mp3",
+  "blue.mp3",
+  "3am.mp3",
+  "bear.mp3"
+
+];
+
+let currentSong = 0;
+
+const musicPlayer =
+  document.getElementById("bgMusic");
+function playMusic(){
+
+  musicPlayer.src = playlist[currentSong];
+
+  musicPlayer.play();
+const volumeSlider =
+  document.getElementById("volumeSlider");
+
+/* DEFAULT VOLUME */
+
+musicPlayer.volume = 0.4;
+
+/* SLIDER CONTROL */
+
+volumeSlider.addEventListener("input", () => {
+
+  musicPlayer.volume = volumeSlider.value;
+
+});
+}
+
+/* AUTO PLAY NEXT SONG */
+
+musicPlayer.addEventListener("ended", () => {
+
+  currentSong++;
+
+  if(currentSong >= playlist.length){
+
+    currentSong = 0;
+
+  }
+
+  musicPlayer.src = playlist[currentSong];
+
+  musicPlayer.play();
+
+});
+
+/* MOODS */
+
+const moods = [
+
+  "sleepy but iconic",
+  "main character in target",
+  "emotionally attached to playlists",
+  "thriving softly",
+  "cozy chaos",
+  "romanticizing life",
+  "running on caffeine and delusion",
+  "healing but dramatic"
+
+];
+
+function newMood(){
+
+  const randomMood =
+    moods[Math.floor(Math.random() * moods.length)];
+
+  document.getElementById("moodDisplay").innerText =
+    randomMood;
+
+}
+
+/* DIARY */
+
+let currentCategory = "thoughts";
+
+function setCategory(category){
+
+  currentCategory = category;
+
+  alert("Category set to: " + category);
+
+}
+
+function saveEntry(){
+
+  const input =
+    document.getElementById("diaryInput").value;
+
+  if(input.trim() === ""){
+
+    alert("Write something first!");
+
+    return;
+
+  }
+
+  let entries =
+    JSON.parse(localStorage.getItem("entries")) || [];
+
+  entries.push({
+
+    category:currentCategory,
+    text:input,
+    date:new Date().toLocaleString()
+
+  });
+
+  localStorage.setItem(
+    "entries",
+    JSON.stringify(entries)
+  );
+
+  document.getElementById("diaryInput").value = "";
+
+  alert("✨ Entry Saved!");
+
+}
+
+function viewEntries(){
+
+  let entries =
+    JSON.parse(localStorage.getItem("entries")) || [];
+
+  const container =
+    document.getElementById("entriesContainer");
+
+  container.innerHTML = "";
+
+  entries.reverse().forEach(entry => {
+
+    container.innerHTML += `
+
+      <div class="entry">
+
+        <strong>
+          ${entry.category.toUpperCase()}
+        </strong>
+
+        <br><br>
+
+        ${entry.text}
+
+        <br><br>
+
+        <small>
+          ${entry.date}
+        </small>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+/* VAULT */
+
+function unlockVault(){
+
+  const password =
+    document.getElementById("vaultPassword").value;
+
+  if(password === "20Danger20"){
+
+    document.getElementById("secretPage")
+      .style.display = "block";
+
+  }else{
+
+    alert("Wrong password 👀");
+
+  }
+
+}
+let galleryOpen = false;
+
+function toggleGallery(){
+
+  const extraPhotos =
+    document.getElementById("extraPhotos");
+
+  const plusSymbol =
+    document.getElementById("plusSymbol");
+
+  if(!galleryOpen){
+
+    extraPhotos.style.display = "grid";
+
+    plusSymbol.innerText = "−";
+
+    galleryOpen = true;
+
+  }else{
+
+    extraPhotos.style.display = "none";
+
+    plusSymbol.innerText = "+";
+
+    galleryOpen = false;
+
+  }
+/* SECRET VAULT NOTES */
+
+function saveVaultNotes(){
+
+  const notes =
+    document.getElementById("vaultNotes").value;
+
+  localStorage.setItem(
+    "vaultNotes",
+    notes
+  );
+
+  alert("🔒 Vault notes saved!");
+
+}
+
+/* LOAD VAULT NOTES */
+
+window.addEventListener("load", () => {
+
+  const savedNotes =
+    localStorage.getItem("vaultNotes");
+
+  if(savedNotes){
+
+    document.getElementById("vaultNotes").value =
+      savedNotes;
+
+  }
+
+});
+}
+</script>
+
+</body>
+</html>
