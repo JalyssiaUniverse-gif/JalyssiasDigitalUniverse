@@ -1045,6 +1045,140 @@ window.addEventListener("load", () => {
 });
 }
 </script>
+<!-- 🌙 Ask Zula: Moon Oracle Orb -->
+
+<div class="zula-oracle-wrapper">
+
+  <h2 class="zula-title">🌙 Ask Zula</h2>
+
+  <div class="moon-orb" onclick="askZula()">
+    <div class="moon-glow"></div>
+    <div class="moon-core">🌕</div>
+  </div>
+
+  <p class="zula-hint">Tap the moon to consult the oracle</p>
+
+  <div id="zulaResponse" class="zula-response"></div>
+
+</div>
+
+<style>
+.zula-oracle-wrapper {
+    text-align: center;
+    margin: 60px auto;
+    max-width: 500px;
+    color: white;
+    font-family: inherit;
+}
+
+/* Title */
+.zula-title {
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* Orb container */
+.moon-orb {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+/* glowing aura */
+.moon-glow {
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(255,255,255,0.35),
+        rgba(120,180,255,0.15),
+        transparent 70%);
+    filter: blur(10px);
+    animation: pulse 3s infinite ease-in-out;
+}
+
+/* moon core */
+.moon-core {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    background: radial-gradient(circle at 30% 30%, #ffffff, #bcd7ff);
+    box-shadow:
+        0 0 25px rgba(180,220,255,0.6),
+        inset -10px -10px 25px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+
+/* hover lift */
+.moon-orb:hover .moon-core {
+    transform: scale(1.08);
+}
+
+/* hint text */
+.zula-hint {
+    opacity: 0.7;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+/* response */
+.zula-response {
+    margin-top: 25px;
+    font-size: 1.2em;
+    min-height: 40px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.6s ease;
+}
+
+.zula-response.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* glow animation */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+</style>
+
+<script>
+function askZula() {
+    const responses = [
+        "🌕 The path is clear.",
+        "🌗 More information is needed.",
+        "🌑 Not today.",
+        "🌙 Trust your first instinct.",
+        "⭐ The risk is worth the story.",
+        "🦉 Sleep on it.",
+        "🔥 The scary option may be the right one.",
+        "🍃 Give it another day.",
+        "💎 Choose what brings peace, not applause.",
+        "🗝️ You already know the answer.",
+        "🌌 The universe declines to comment.",
+        "📚 Future You votes yes.",
+        "☕ Ask again after snacks."
+    ];
+
+    const el = document.getElementById("zulaResponse");
+    const pick = responses[Math.floor(Math.random() * responses.length)];
+
+    el.classList.remove("show");
+    
+    setTimeout(() => {
+        el.textContent = pick;
+        el.classList.add("show");
+    }, 150);
+}
+</script>
 
 </body>
 </html>
