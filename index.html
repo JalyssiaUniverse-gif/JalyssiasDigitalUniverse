@@ -181,6 +181,7 @@ nav{
 }
 
 .logo{
+  font-family:'Honey Script Light', cursive;
   font-size:28px;
   font-weight:bold;
   color:#fff;
@@ -215,6 +216,7 @@ nav{
 }
 
 .hero h1{
+  font-family: 'Honey Script Light', cursive;
   font-size:72px;
   margin-bottom:20px;
   text-shadow:0 5px 20px rgba(0,0,0,0.25);
@@ -256,6 +258,7 @@ section{
 }
 
 .section-title h2{
+  font-family:'Honey Script Light', cursive;
   font-size:50px;
   margin-bottom:10px;
 }
@@ -986,6 +989,7 @@ function unlockVault(){
 }
 let galleryOpen = false;
 
+function toggleGallery(){
 
   const extraPhotos =
     document.getElementById("extraPhotos");
@@ -996,20 +1000,19 @@ let galleryOpen = false;
   if(!galleryOpen){
 
     extraPhotos.style.display = "grid";
-
-    plusSymbol.innerText = "−";
-
+    plusSymbol.innerText = "Close Memory Vault 💜";
     galleryOpen = true;
 
-  }else{
+  } else {
 
     extraPhotos.style.display = "none";
-
-    plusSymbol.innerText = "+";
-
+    plusSymbol.innerText = "Open The Memory Vault 💖";
     galleryOpen = false;
 
   }
+
+}
+
 /* SECRET VAULT NOTES */
 
 function saveVaultNotes(){
@@ -1023,8 +1026,6 @@ function saveVaultNotes(){
   );
 
   alert("🔒 Vault notes saved!");
-
-function toggleGallery(){
 
 }
 
@@ -1043,7 +1044,6 @@ window.addEventListener("load", () => {
   }
 
 });
-}
 
 </script>
 <!-- 🌙 Ask Zula: Moon Oracle Orb -->
@@ -1150,39 +1150,8 @@ window.addEventListener("load", () => {
     50% { transform: scale(1.1); opacity: 1; }
 }
 </style>
-
 <script>
-function askZula() {
-    const responses = [
-        "🌕 The path is clear.",
-        "🌗 More information is needed.",
-        "🌑 Not today.",
-        "🌙 Trust your first instinct.",
-        "⭐ The risk is worth the story.",
-        "🦉 Sleep on it.",
-        "🔥 The scary option may be the right one.",
-        "🍃 Give it another day.",
-        "💎 Choose what brings peace, not applause.",
-        "🗝️ You already know the answer.",
-        "🌌 The universe declines to comment.",
-        "📚 Future You votes yes.",
-        "☕ Ask again after snacks."
-    ];
 
-    const el = document.getElementById("zulaResponse");
-    const pick = responses[Math.floor(Math.random() * responses.length)];
-
-    el.classList.remove("show");
-    
-    setTimeout(() => {
-        el.textContent = pick;
-        el.classList.add("show");
-    }, 150);
-}
-</script>
-
-</footer>
-<script>
 /* =========================
    🌙 INNER SANCTUM BRAIN
    ========================= */
