@@ -2,129 +2,65 @@
 <html lang="en">
 <head>
   <style>
-/* =========================
-   🌙 GLOBAL MOON UI THEME
-   ========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: "Trebuchet MS", system-ui, sans-serif;
-    color: #eaf2ff;
-
-    /* cosmic gradient background */
-    background: radial-gradient(circle at top, #0b1020, #050712 60%, #02030a);
-
-    overflow-x: hidden;
+  font-family: "Trebuchet MS", system-ui, sans-serif;
+  color: #eaf2ff;
+  background: radial-gradient(circle at top,
+  #8063a5,
+  #120a24 60%,
+  #070510
+);
+  overflow-x: hidden;
 }
 
-/* subtle animated starfield feel */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image:
-        radial-gradient(white 1px, transparent 1px);
-    background-size: 60px 60px;
-    opacity: 0.05;
-    pointer-events: none;
-    animation: drift 60s linear infinite;
+/* basic structure stability */
+section, nav, header, footer, .card, .container {
+  max-width: 1000px;
+  margin: auto;
 }
 
-@keyframes drift {
-    from { transform: translateY(0px); }
-    to { transform: translateY(-200px); }
+/* glass panels */
+.card, .container, .hero, .gallery {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(160,200,255,0.12);
+  border-radius: 18px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
 }
 
-/* headings feel celestial */
+/* headings */
 h1, h2, h3 {
-    text-align: center;
-    letter-spacing: 1px;
-    color: #f2f7ff;
-    text-shadow: 0 0 12px rgba(160, 200, 255, 0.25);
+  text-align: center;
+  color: #f2f7ff;
+  text-shadow: 0 0 12px rgba(160, 200, 255, 0.25);
 }
 
-/* links */
-a {
-    color: #9cc7ff;
-    text-decoration: none;
-    transition: 0.3s ease;
-}
-
-a:hover {
-    color: #ffffff;
-    text-shadow: 0 0 10px rgba(140, 190, 255, 0.6);
-}
-
-/* generic “lunar panel” (use this for sections) */
-.section, .box, .container {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(180, 210, 255, 0.15);
-    border-radius: 18px;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 900px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 30px rgba(120, 160, 255, 0.08);
-}
-
-/* buttons (unifies everything including Ask Zula) */
+/* buttons */
 button {
-    background: radial-gradient(circle at top, #dfefff, #8fb7ff);
-    border: none;
-    padding: 10px 18px;
-    border-radius: 12px;
-    cursor: pointer;
-    color: #0b1020;
-    font-weight: bold;
-    transition: all 0.25s ease;
-    box-shadow: 0 0 18px rgba(120, 170, 255, 0.25);
+  background: radial-gradient(circle at top, #ead6ff, #b58cff);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #0b1020;
+  font-weight: bold;
 }
 
-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 28px rgba(140, 190, 255, 0.45);
-}
-
-/* smooth text reveal utility */
-.fade-in {
-    animation: fadeIn 0.6s ease forwards;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* make emojis feel like sigils */
-span.emoji {
-    filter: drop-shadow(0 0 6px rgba(140, 190, 255, 0.4));
+/* ORACLE SAFETY STYLE */
+.zula-oracle-wrapper {
+  text-align: center;
+  margin: 60px auto;
+  max-width: 500px;
 }
 </style>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
 
-<title>Jalyssia's Digital Universe</title>
-
-<style>
-
-*{
-  /* HIDDEN GALLERY */
-
-.hidden-gallery{
-
-  display:none;
-
-  grid-column:1 / -1;
-
-  grid-template-columns:
-    repeat(auto-fit,minmax(280px,1fr));
-
-  gap:25px;
-
-  margin-top:20px;
-
-}
 
 /* PLUS CARD */
 
@@ -158,49 +94,15 @@ span.emoji {
     rgba(255,255,255,0.28);
 
 }
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
 
 html{
   scroll-behavior:smooth;
-}
-
-body{
-  font-family: 'Trebuchet MS', sans-serif;
-  overflow-x:hidden;
-  color:#fff;
-  background:
-    linear-gradient(
-      135deg,
-      #f6d6bd,
-      #e8c7b7,
-      #cdb4db,
-      #a2d2ff
-    );
-
-  background-size:400% 400%;
-  animation:bgShift 15s ease infinite;
-  min-height:100vh;
-}
-
-/* BACKGROUND ANIMATION */
-
-@keyframes bgShift{
-
-  0%{
-    background-position:0% 50%;
-  }
-
-  50%{
-    background-position:100% 50%;
-  }
-
-  100%{
-    background-position:0% 50%;
-  }
-
 }
 
 /* FLOATING SPARKLES */
@@ -325,15 +227,11 @@ nav{
   margin-bottom:35px;
 }
 
-.hero button{
-  background:white;
-  color:#7b5ea7;
-  border:none;
-  padding:16px 32px;
-  border-radius:40px;
-  font-weight:bold;
-  cursor:pointer;
-  transition:0.3s;
+.hero button {
+    background: radial-gradient(circle at top, #ead6ff, #b58cff);
+    color: #0b1020;
+    border-radius: 40px;
+    box-shadow: 0 0 18px rgba(120, 170, 255, 0.25);
 }
 
 .hero button:hover{
@@ -579,7 +477,7 @@ for(let i = 0; i < 12; i++){
       My soft dreamscape filled with memories,
       playlists, secrets, chaos, growth,
       screenshots, and emotionally important lore.
-      ☾ Consult Zula down Below ☾
+     ☾ Consult Zula down below ☾
     </p>
 
  <div style="margin-top:30px;">
@@ -910,7 +808,7 @@ const playlist = [
   "blue.mp3",
   "3am.mp3",
   "bear.mp3",
-  "close.mps"
+  "close.mp3" 
 
 ];
 
@@ -1088,7 +986,6 @@ function unlockVault(){
 }
 let galleryOpen = false;
 
-function toggleGallery(){
 
   const extraPhotos =
     document.getElementById("extraPhotos");
@@ -1127,6 +1024,8 @@ function saveVaultNotes(){
 
   alert("🔒 Vault notes saved!");
 
+function toggleGallery(){
+
 }
 
 /* LOAD VAULT NOTES */
@@ -1145,6 +1044,7 @@ window.addEventListener("load", () => {
 
 });
 }
+
 </script>
 <!-- 🌙 Ask Zula: Moon Oracle Orb -->
 
@@ -1210,10 +1110,10 @@ window.addEventListener("load", () => {
     align-items: center;
     justify-content: center;
     font-size: 48px;
-    background: radial-gradient(circle at 30% 30%, #ffffff, #a9c9ff);
+   background: radial-gradient(circle at 30% 30%, #ffffff, #a9c9ff);
     box-shadow:
-      0 0 30px rgba(140,190,255,0.35),
-      inset -10px -10px 25px rgba(0,0,0,0.15);
+    0 0 30px rgba(140,190,255,0.35),
+    inset -10px -10px 25px rgba(0,0,0,0.15);
     transition: transform 0.3s ease;
 }
 
@@ -1281,5 +1181,115 @@ function askZula() {
 }
 </script>
 
+</footer>
+<script>
+/* =========================
+   🌙 INNER SANCTUM BRAIN
+   ========================= */
+
+const Sanctum = {
+    visits: 0,
+    mood: "calm",
+    oracleClicks: 0,
+    lastMessage: null,
+    unlocked: false
+};
+
+/* Load memory */
+function loadSanctum() {
+    const saved = JSON.parse(localStorage.getItem("sanctumMemory"));
+    if (saved) {
+        Object.assign(Sanctum, saved);
+    }
+    Sanctum.visits += 1;
+    saveSanctum();
+}
+
+/* Save memory */
+function saveSanctum() {
+    localStorage.setItem("sanctumMemory", JSON.stringify(Sanctum));
+}
+
+/* Mood engine */
+function updateMood() {
+    if (Sanctum.oracleClicks > 10) Sanctum.mood = "restless";
+    if (Sanctum.visits > 5) Sanctum.mood = "familiar";
+    if (Sanctum.oracleClicks === 0) Sanctum.mood = "quiet";
+    if (Sanctum.visits > 15) Sanctum.mood = "deep";
+
+    document.body.setAttribute("data-mood", Sanctum.mood);
+}
+
+/* Oracle logic */
+function askZula() {
+    Sanctum.oracleClicks++;
+    saveSanctum();
+
+    const base = [
+        "🌙 The path is still forming.",
+        "🗝️ You already know, you’re just avoiding it.",
+        "🌌 Not all answers want to be spoken.",
+        "🌕 Yes, but not yet.",
+        "🌑 No, but you’ll understand why later.",
+        "✨ This decision will echo further than you expect.",
+        "🦉 Pause. Watch what you feel next.",
+        "🔥 The risk is not the problem. Fear is.",
+        "🍃 Let it breathe before you decide.",
+        "💎 Choose peace, even if it’s smaller.",
+        "📡 Something in you already decided.",
+        "🌗 You’re asking the wrong question.",
+        "☕ Return when you’re less loud inside."
+    ];
+
+    const rare = [
+        "🗝️ A hidden thread has been noticed.",
+        "🌌 The Sanctum remembers you.",
+        "🌙 You’ve asked this before. The answer didn’t change.",
+        "✨ Something opens briefly… then closes."
+    ];
+
+    let pool = base;
+
+    // hidden logic: rare responses unlock after repetition
+    if (Sanctum.oracleClicks > 7) {
+        pool = base.concat(rare);
+    }
+
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+
+    const el = document.getElementById("zulaResponse");
+
+    el.classList.remove("show");
+
+    setTimeout(() => {
+        el.textContent = pick;
+        el.classList.add("show");
+    }, 120);
+
+    Sanctum.lastMessage = pick;
+
+    // secret unlock condition
+    if (Sanctum.oracleClicks >= 12 && !Sanctum.unlocked) {
+        Sanctum.unlocked = true;
+        triggerSecret();
+    }
+
+    updateMood();
+    saveSanctum();
+}
+
+/* Secret behavior */
+function triggerSecret() {
+    const vault = document.querySelector(".vault p");
+    if (vault) {
+        vault.textContent =
+        "🗝️ The Vault recognizes you now. Something shifts behind the glass.";
+    }
+}
+
+/* initialize */
+loadSanctum();
+updateMood();
+</script>
 </body>
 </html>
