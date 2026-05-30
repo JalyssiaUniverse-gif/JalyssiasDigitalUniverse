@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     @font-face {
   font-family: 'Honey Script Light';
@@ -13,7 +14,7 @@
 }
 
 body {
-  font-family: "Trebuchet MS", system-ui, sans-serif;
+  font-family: 'Quicksand', sans-serif;
   color: #eaf2ff;
   background: radial-gradient(circle at top,
   #8063a5,
@@ -40,22 +41,36 @@ section, nav, header, footer, .card, .container {
 
 /* headings */
 h1, h2, h3 {
+  font-weight: 600;
   text-align: center;
   color: #f2f7ff;
   text-shadow: 0 0 12px rgba(160, 200, 255, 0.25);
 }
 
-/* buttons */
 button {
-  background: radial-gradient(circle at top, #ead6ff, #b58cff);
-  border: none;
-  padding: 10px 18px;
-  border-radius: 12px;
-  cursor: pointer;
-  color: #0b1020;
-  font-weight: bold;
-}
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 
+  padding: 12px 18px;
+  border-radius: 14px;
+
+  border: 1px solid rgba(255,255,255,0.18);
+  cursor: pointer;
+
+  background: radial-gradient(circle at top, #ead6ff, #b58cff);
+  color: #0b1020;
+
+  box-shadow: 0 6px 18px rgba(120, 170, 255, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 24px rgba(120, 170, 255, 0.28);
+}
+    button:active {
+  transform: translateY(0px) scale(0.98);
+}
 /* ORACLE SAFETY STYLE */
 .zula-oracle-wrapper {
   text-align: center;
@@ -343,16 +358,32 @@ button{
   cursor:pointer;
 }
 
-.action-btn{
-  background:white;
-  color:#7b5ea7;
-  padding:14px 24px;
-  border-radius:30px;
-  margin-right:10px;
-  margin-bottom:10px;
-  font-weight:bold;
+.action-btn {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+
+  background: rgba(255,255,255,0.12);
+  color: #f5e9ff;
+
+  border: 1px solid rgba(255,255,255,0.18);
+
+  padding: 12px 20px;
+  border-radius: 20px;
+
+  backdrop-filter: blur(10px);
+
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
+.action-btn:hover {
+  background: rgba(255,255,255,0.18);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(120, 170, 255, 0.18);
+}
+
+.action-btn:active {
+  transform: translateY(0px) scale(0.98);
+}
 .category-buttons{
   margin-bottom:20px;
 }
