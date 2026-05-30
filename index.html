@@ -1,6 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>
+/* =========================
+   🌙 GLOBAL MOON UI THEME
+   ========================= */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Trebuchet MS", system-ui, sans-serif;
+    color: #eaf2ff;
+
+    /* cosmic gradient background */
+    background: radial-gradient(circle at top, #0b1020, #050712 60%, #02030a);
+
+    overflow-x: hidden;
+}
+
+/* subtle animated starfield feel */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        radial-gradient(white 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.05;
+    pointer-events: none;
+    animation: drift 60s linear infinite;
+}
+
+@keyframes drift {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-200px); }
+}
+
+/* headings feel celestial */
+h1, h2, h3 {
+    text-align: center;
+    letter-spacing: 1px;
+    color: #f2f7ff;
+    text-shadow: 0 0 12px rgba(160, 200, 255, 0.25);
+}
+
+/* links */
+a {
+    color: #9cc7ff;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(140, 190, 255, 0.6);
+}
+
+/* generic “lunar panel” (use this for sections) */
+.section, .box, .container {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(180, 210, 255, 0.15);
+    border-radius: 18px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 900px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(120, 160, 255, 0.08);
+}
+
+/* buttons (unifies everything including Ask Zula) */
+button {
+    background: radial-gradient(circle at top, #dfefff, #8fb7ff);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #0b1020;
+    font-weight: bold;
+    transition: all 0.25s ease;
+    box-shadow: 0 0 18px rgba(120, 170, 255, 0.25);
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 28px rgba(140, 190, 255, 0.45);
+}
+
+/* smooth text reveal utility */
+.fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* make emojis feel like sigils */
+span.emoji {
+    filter: drop-shadow(0 0 6px rgba(140, 190, 255, 0.4));
+}
+</style>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -1110,10 +1210,10 @@ window.addEventListener("load", () => {
     align-items: center;
     justify-content: center;
     font-size: 48px;
-    background: radial-gradient(circle at 30% 30%, #ffffff, #bcd7ff);
+    background: radial-gradient(circle at 30% 30%, #ffffff, #a9c9ff);
     box-shadow:
-        0 0 25px rgba(180,220,255,0.6),
-        inset -10px -10px 25px rgba(0,0,0,0.15);
+      0 0 30px rgba(140,190,255,0.35),
+      inset -10px -10px 25px rgba(0,0,0,0.15);
     transition: transform 0.3s ease;
 }
 
