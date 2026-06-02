@@ -1,24 +1,320 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Memory Gallery</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Constellation of Memories</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:"Trebuchet MS", sans-serif;
+  color:#f2e9ff;
+
+  background:
+    radial-gradient(circle at top,
+    #1a0b2e,
+    #120a24 60%,
+    #070510);
+
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* STARFIELD */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+
+  background-image:
+    radial-gradient(white 1px, transparent 1px);
+
+  background-size:70px 70px;
+
+  opacity:0.05;
+
+  pointer-events:none;
+
+  animation:drift 80s linear infinite;
+}
+
+@keyframes drift{
+  from{
+    transform:translateY(0);
+  }
+
+  to{
+    transform:translateY(-200px);
+  }
+}
+
+/* NAVIGATION */
+
+nav{
+  text-align:center;
+  padding:25px;
+}
+
+nav a{
+  color:#e6d8ff;
+  text-decoration:none;
+  margin:0 15px;
+  transition:0.3s;
+}
+
+nav a:hover{
+  color:white;
+  text-shadow:
+    0 0 10px rgba(181,140,255,0.8);
+}
+
+/* HEADER */
+
+.header{
+  text-align:center;
+  padding:40px 20px;
+}
+
+.header h1{
+
+  font-size:3rem;
+
+  text-shadow:
+    0 0 20px rgba(181,140,255,0.35);
+
+  margin-bottom:15px;
+}
+
+.gallery-intro{
+
+  max-width:700px;
+
+  margin:auto;
+
+  opacity:0.8;
+
+  line-height:1.7;
+}
+
+/* SECTION CARD */
+
+.section{
+
+  width:90%;
+  max-width:1200px;
+
+  margin:40px auto;
+
+  padding:30px;
+
+  border-radius:25px;
+
+  background:
+    rgba(120,60,160,0.10);
+
+  border:
+    1px solid rgba(190,140,255,0.18);
+
+  backdrop-filter:blur(10px);
+
+  box-shadow:
+    0 0 40px rgba(140,90,255,0.08);
+}
+
+/* GALLERY */
+
+.gallery{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+  gap:25px;
+
+  margin-top:30px;
+}
+
+.memory-card{
+
+  background:
+    rgba(255,255,255,0.04);
+
+  border:
+    1px solid rgba(190,140,255,0.15);
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  transition:0.35s;
+}
+
+.memory-card:hover{
+
+  transform:
+    translateY(-8px)
+    scale(1.02);
+
+  box-shadow:
+    0 0 30px rgba(181,140,255,0.25);
+}
+
+.memory-card img{
+
+  width:100%;
+
+  height:320px;
+
+  object-fit:cover;
+}
+
+.memory-caption{
+
+  padding:18px;
+
+  text-align:center;
+
+  color:#f2e9ff;
+}
+
+/* FOOTER */
+
+footer{
+
+  text-align:center;
+
+  padding:50px;
+
+  opacity:0.6;
+}
+
+</style>
 </head>
+
 <body>
 
-<h1>📸 Memory Gallery</h1>
+<nav>
 
-<p>Welcome to my photo collection.</p>
+  <a href="index.html">🏠 Home</a>
 
-<img src="1.jpeg" width="300">
-<img src="2.jpeg" width="300">
-<img src="3.JPG" width="300">
-<img src="4.jpeg" width="300">
-<img src="5.jpeg" width="300">
-<img src="6.jpeg" width="300">
+  <a href="diary.html">📖 Diary</a>
 
-<br><br>
+  <a href="oracle.html">🌙 Ask Zula</a>
 
-<a href="index.html">🏠 Return Home</a>
+  <a href="vault.html">🔒 Vault</a>
+
+</nav>
+
+<div class="header">
+
+  <h1>✨ Constellation of Memories ✨</h1>
+
+  <p class="gallery-intro">
+
+    Each star contains a moment worth keeping.
+    Some are loud. Some are quiet.
+    Some changed everything.
+    Together they form a constellation uniquely mine.
+
+  </p>
+
+</div>
+
+<div class="section">
+
+  <div class="gallery">
+
+    <div class="memory-card">
+
+      <img src="1.jpeg">
+
+      <div class="memory-caption">
+
+        🌸 Growth Era
+
+      </div>
+
+    </div>
+
+    <div class="memory-card">
+
+      <img src="2.jpeg">
+
+      <div class="memory-caption">
+
+        ☕ Cozy Moments
+
+      </div>
+
+    </div>
+
+    <div class="memory-card">
+
+      <img src="3.JPG">
+
+      <div class="memory-caption">
+
+        🎧 Soundtrack Memories
+
+      </div>
+
+    </div>
+
+    <div class="memory-card">
+
+      <img src="4.jpeg">
+
+      <div class="memory-caption">
+
+        🌙 Inner Sanctum Archives
+
+      </div>
+
+    </div>
+
+    <div class="memory-card">
+
+      <img src="5.jpeg">
+
+      <div class="memory-caption">
+
+        ✨ Main Character Energy
+
+      </div>
+
+    </div>
+
+    <div class="memory-card">
+
+      <img src="6.jpeg">
+
+      <div class="memory-caption">
+
+        💜 Favorite Chapters
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+
+  Every constellation begins with a single star 🌙
+
+</footer>
 
 </body>
 </html>
