@@ -112,32 +112,7 @@ button{
 <script>
 
 function saveEntry(){
-
-    const text =
-      document.getElementById("diaryInput").value;
-
-    if(text.trim() === ""){
-        alert("Write something first.");
-        return;
-    }
-
-    let entries =
-      JSON.parse(localStorage.getItem("diaryEntries"))
-      || [];
-
-    entries.unshift({
-        text:text,
-        date:new Date().toLocaleString()
-    });
-
-    localStorage.setItem(
-      "diaryEntries",
-      JSON.stringify(entries)
-    );
-
-    document.getElementById("diaryInput").value="";
-
-    loadEntries();
+   // your existing save code
 }
 
 function loadEntries(){
@@ -146,13 +121,11 @@ function loadEntries(){
       document.getElementById("entries");
 
     const entries =
-      JSON.parse(localStorage.getItem("diaryEntries"))
-      || [];
+      JSON.parse(localStorage.getItem("diaryEntries")) || [];
 
     container.innerHTML = "";
 
     entries.forEach(entry => {
-
         container.innerHTML += `
             <div class="entry">
                 <div class="date">
@@ -165,7 +138,8 @@ function loadEntries(){
     });
 }
 
-loadEntries();
+/* 🌙 THIS is the magic line */
+window.onload = loadEntries;
 
 </script>
 
