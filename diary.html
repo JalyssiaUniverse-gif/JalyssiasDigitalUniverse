@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Diary</title>
+
+<style>
+body{
+    font-family: "Trebuchet MS", sans-serif;
+    background: radial-gradient(circle at top,
+      #1a0b2e,
+      #120a24 60%,
+      #070510);
+    color:#f2e9ff;
+    margin:0;
+    padding:40px 20px;
+}
+
+nav{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+nav a{
+    color:#e7d4ff;
+    text-decoration:none;
+    margin:0 15px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:rgba(120,60,160,0.12);
+    border:1px solid rgba(190,140,255,0.18);
+    border-radius:20px;
+    padding:30px;
+    backdrop-filter:blur(10px);
+}
+
+h1{
+    text-align:center;
+}
+
+textarea{
+    width:100%;
+    min-height:200px;
+    border:none;
+    border-radius:15px;
+    padding:15px;
+    margin-top:20px;
+    font-family:inherit;
+    font-size:16px;
+}
+
+button{
+    margin-top:15px;
+    padding:12px 20px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    background:#c7a6ff;
+    color:#120a24;
+    font-weight:bold;
+}
+
+.entry{
+    margin-top:20px;
+    padding:15px;
+    border-radius:15px;
+    background:rgba(255,255,255,0.06);
+}
+
+.date{
+    opacity:0.6;
+    font-size:0.85em;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="index.html">🏠 Home</a>
+    <a href="photos.html">📸 Photos</a>
+    <a href="oracle.html">🌙 Ask Zula</a>
+    <a href="vault.html">🔒 Vault</a>
+</nav>
+
+<div class="container">
+
+    <h1>📖 Digital Diary</h1>
+
+    <p>
+        A place for thoughts, plans, victories, chaos,
+        and whatever else wants to live here.
+    </p>
+
+    <textarea
+      id="diaryInput"
+      placeholder="Write today's entry..."
+    ></textarea>
+
+    <button onclick="saveEntry()">
+        Save Entry 🌙
+    </button>
+
+    <div id="entries"></div>
+
+</div>
+
+<script>
+
+function saveEntry(){
+
+    const text =
+      document.getElementById("diaryInput").value;
+
+    if(text.trim() === ""){
+        alert("Write something first.");
+        return;
+    }
+
+    let entries =
+      JSON.parse(localStorage.getItem("diaryEntries"))
+      || [];
+
+    entries.unshift({
+        text:text,
+        date:new Date().toLocaleString()
+    });
+
+    localStorage.setItem(
+      "diaryEntries",
+      JSON.stringify(entries)
+    );
+
+    document.getElementById("diaryInput").value="";
+
+    loadEntries();
+}
+
+function loadEntries(){
+
+    const container =
+      document.getElementById("entries");
+
+    const entries =
+      JSON.parse(localStorage.getItem("diaryEntries"))
+      || [];
+
+    container.innerHTML = "";
+
+    entries.forEach(entry => {
+
+        container.innerHTML += `
+            <div class="entry">
+                <div class="date">
+                    ${entry.date}
+                </div>
+                <br>
+                ${entry.text}
+            </div>
+        `;
+    });
+}
+
+loadEntries();
+
+</script>
+
+</body>
+</html>
