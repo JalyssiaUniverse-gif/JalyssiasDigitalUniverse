@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The Inner Sanctum</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:"Trebuchet MS", sans-serif;
+  color:#f2e9ff;
+
+  background:
+    radial-gradient(circle at top,
+    #1a0b2e,
+    #120a24 60%,
+    #070510);
+
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* STARFIELD */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+
+  background-image:
+    radial-gradient(white 1px, transparent 1px);
+
+  background-size:70px 70px;
+
+  opacity:0.05;
+
+  pointer-events:none;
+}
+
+/* NAV */
+
+nav{
+  text-align:center;
+  padding:25px;
+}
+
+nav a{
+  color:#e6d8ff;
+  text-decoration:none;
+  margin:0 15px;
+}
+
+nav a:hover{
+  color:white;
+}
+
+/* MAIN VAULT */
+
+.vault-container{
+
+  width:90%;
+  max-width:850px;
+
+  margin:60px auto;
+
+  padding:40px;
+
+  background:
+    rgba(120,60,160,0.10);
+
+  border:
+    1px solid rgba(190,140,255,0.18);
+
+  border-radius:25px;
+
+  backdrop-filter:blur(10px);
+
+  text-align:center;
+}
+
+h1{
+
+  margin-bottom:15px;
+
+  text-shadow:
+    0 0 20px rgba(181,140,255,0.35);
+}
+
+.subtitle{
+
+  opacity:0.75;
+
+  margin-bottom:40px;
+
+  line-height:1.6;
+}
+
+/* PASSWORD */
+
+input{
+
+  width:100%;
+  padding:16px;
+
+  border:none;
+
+  border-radius:15px;
+
+  margin-bottom:20px;
+
+  font-size:16px;
+}
+
+button{
+
+  background:
+    linear-gradient(
+      135deg,
+      #e8d2ff,
+      #c59cff
+    );
+
+  color:#1a0b2e;
+
+  border:none;
+
+  padding:14px 25px;
+
+  border-radius:15px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:0.3s;
+}
+
+button:hover{
+
+  transform:scale(1.05);
+}
+
+/* SECRET CONTENT */
+
+#sanctum{
+
+  display:none;
+
+  margin-top:40px;
+
+  text-align:left;
+}
+
+/* MEMORY CARDS */
+
+.memory{
+
+  background:
+    rgba(255,255,255,0.05);
+
+  padding:20px;
+
+  border-radius:18px;
+
+  margin-bottom:20px;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+}
+
+.memory h3{
+
+  margin-bottom:10px;
+}
+
+/* NOTES */
+
+textarea{
+
+  width:100%;
+
+  min-height:180px;
+
+  padding:15px;
+
+  border:none;
+
+  border-radius:15px;
+
+  margin-top:15px;
+}
+
+footer{
+
+  text-align:center;
+
+  padding:40px;
+
+  opacity:0.6;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<a href="index.html">🏠 Home</a>
+<a href="photos.html">📸 Photos</a>
+<a href="diary.html">📖 Diary</a>
+<a href="oracle.html">🌙 Ask Zula</a>
+
+</nav>
+
+<div class="vault-container">
+
+<h1>🔒 The Inner Sanctum</h1>
+
+<p class="subtitle">
+
+Beyond this door lie secret thoughts,
+future plans,
+cherished memories,
+and emotionally significant lore.
+
+</p>
+
+<input
+type="password"
+id="vaultPassword"
+placeholder="Speak the secret phrase..."
+>
+
+<button onclick="unlockVault()">
+Unlock Sanctum 🌙
+</button>
+
+<div id="sanctum">
+
+<hr style="margin:30px 0; opacity:.2;">
+
+<div class="memory">
+
+<h3>💭 Secret Thoughts</h3>
+
+<p>
+Reserved for ideas not yet ready
+for the rest of the universe.
+</p>
+
+<textarea
+id="vaultNotes"
+placeholder="Future plans, tea, goals, midnight thoughts..."
+></textarea>
+
+<br><br>
+
+<button onclick="saveNotes()">
+Save Notes
+</button>
+
+</div>
+
+<div class="memory">
+
+<h3>🌟 Future Manifestations</h3>
+
+<ul style="line-height:2;">
+<li>✨ Dream Home</li>
+<li>✨ Financial Freedom</li>
+<li>✨ Personal Growth</li>
+<li>✨ Future Adventures</li>
+</ul>
+
+</div>
+
+<div class="memory">
+
+<h3>🌙 Sanctuary Status</h3>
+
+<p id="welcomeMessage">
+
+The moon recognizes your presence.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+Protected by moonlight 🌙
+
+</footer>
+
+<script>
+
+const SECRET_PASSWORD = "20Danger20";
+
+function unlockVault(){
+
+const entered =
+document.getElementById("vaultPassword").value;
+
+if(entered === SECRET_PASSWORD){
+
+document.getElementById("sanctum")
+.style.display = "block";
+
+}else{
+
+alert("The Sanctum remains sealed.");
+
+}
+
+}
+
+function saveNotes(){
+
+const notes =
+document.getElementById("vaultNotes").value;
+
+localStorage.setItem(
+"vaultNotes",
+notes
+);
+
+alert("🌙 Notes preserved.");
+}
+
+window.onload = () => {
+
+const saved =
+localStorage.getItem("vaultNotes");
+
+if(saved){
+
+document.getElementById("vaultNotes")
+.value = saved;
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
