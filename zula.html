@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ask Zula 🌙 Oracle Observatory</title>
+
+<style>
+
+/* =========================
+   🌌 GLOBAL COSMIC BASE
+========================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:"Trebuchet MS", sans-serif;
+  color:#f3eaff;
+
+  min-height:100vh;
+  overflow-x:hidden;
+
+  background: radial-gradient(circle at top,
+    #1a0b2e,
+    #120a24 55%,
+    #070510);
+
+  transition: background 1.2s ease;
+}
+
+/* starfield */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size:70px 70px;
+  opacity:0.05;
+  pointer-events:none;
+}
+
+/* =========================
+   NAV
+========================= */
+
+nav{
+  text-align:center;
+  padding:20px;
+}
+
+nav a{
+  color:#e6d8ff;
+  text-decoration:none;
+  margin:0 15px;
+  opacity:0.8;
+}
+
+nav a:hover{
+  opacity:1;
+}
+
+/* =========================
+   ORACLE LAYOUT
+========================= */
+
+.container{
+  max-width:900px;
+  margin:40px auto;
+  padding:30px;
+  text-align:center;
+}
+
+/* title */
+h1{
+  font-size:2.8rem;
+  margin-bottom:10px;
+  text-shadow:0 0 20px rgba(190,140,255,0.4);
+}
+
+/* =========================
+   MOON ORB
+========================= */
+
+.orb-wrapper{
+  margin:40px auto;
+  position:relative;
+  width:180px;
+  height:180px;
+  cursor:pointer;
+}
+
+.orb-glow{
+  position:absolute;
+  inset:-30px;
+  border-radius:50%;
+  background:radial-gradient(circle,
+    rgba(200,160,255,0.35),
+    transparent 70%);
+  filter:blur(12px);
+  animation:pulse 3s infinite ease-in-out;
+}
+
+.orb{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+
+  background: radial-gradient(circle at 30% 30%,
+    #ffffff,
+    #b8c7ff,
+    #7c5cff);
+
+  box-shadow:
+    0 0 35px rgba(170,130,255,0.35),
+    inset -15px -15px 25px rgba(0,0,0,0.2);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:50px;
+
+  transition:transform 0.3s ease;
+}
+
+.orb-wrapper:hover .orb{
+  transform:scale(1.08);
+}
+
+@keyframes pulse{
+  0%,100%{ transform:scale(1); opacity:0.6; }
+  50%{ transform:scale(1.1); opacity:1; }
+}
+
+/* =========================
+   UI TEXT
+========================= */
+
+.subtitle{
+  opacity:0.75;
+  margin-bottom:20px;
+}
+
+#oracleText{
+  margin-top:25px;
+  font-size:1.2rem;
+  min-height:60px;
+  transition:all 0.6s ease;
+}
+
+.fade{
+  opacity:0;
+  transform:translateY(10px);
+}
+
+/* meters */
+.meter{
+  margin-top:25px;
+  opacity:0.85;
+}
+
+/* wisdom stars */
+.stars{
+  margin-top:40px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+}
+
+.star{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(200,160,255,0.2);
+  padding:10px 12px;
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.star:hover{
+  transform:scale(1.05);
+  background:rgba(200,160,255,0.12);
+}
+
+/* footer */
+footer{
+  text-align:center;
+  padding:40px;
+  opacity:0.6;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html">🏠 Home</a>
+  <a href="photos.html">📸 Memories</a>
+  <a href="diary.html">📖 Diary</a>
+  <a href="vault.html">🔒 Vault</a>
+</nav>
+
+<div class="container">
+
+<h1>🌙 Ask Zula</h1>
+
+<p class="subtitle" id="welcome">
+Loading celestial interface...
+</p>
+
+<!-- ORB -->
+<div class="orb-wrapper" onclick="consultOracle()">
+  <div class="orb-glow"></div>
+  <div class="orb">🌕</div>
+</div>
+
+<div id="oracleText"></div>
+
+<div class="meter" id="trustMeter"></div>
+
+<!-- WISDOM CONSTELLATION -->
+<div class="stars">
+
+  <div class="star" onclick="revealWisdom()">
+    ⭐ Wisdom #1
+  </div>
+
+  <div class="star" onclick="revealWisdom()">
+    ⭐ Wisdom #2
+  </div>
+
+  <div class="star" onclick="revealWisdom()">
+    ⭐ Wisdom #3
+  </div>
+
+  <div class="star" onclick="revealWisdom()">
+    ⭐ Wisdom #4
+  </div>
+
+</div>
+
+</div>
+
+<footer>
+The Oracle remembers 🌙✨
+</footer>
+
+<script>
+
+/* =========================
+   🌙 ORACLE STATE
+========================= */
+
+let trust = parseInt(localStorage.getItem("zulaTrust")) || 0;
+let visits = parseInt(localStorage.getItem("zulaVisits")) || 0;
+
+/* VISIT MEMORY */
+visits++;
+localStorage.setItem("zulaVisits", visits);
+
+/* =========================
+   WELCOME MESSAGE (Idea 7)
+========================= */
+
+const welcome = document.getElementById("welcome");
+
+if(visits === 1){
+  welcome.innerText = "🌙 The Oracle has never met you.";
+}
+else if(visits < 5){
+  welcome.innerText = "🌙 The Oracle is learning your energy.";
+}
+else if(visits < 15){
+  welcome.innerText = "🌙 The Oracle recognizes your presence.";
+}
+else{
+  welcome.innerText = "🌙 Welcome back, traveler.";
+}
+
+/* =========================
+   ORACLE RESPONSES
+========================= */
+
+const responses = [
+  "🌙 Trust the first instinct.",
+  "🌌 Future You already knows.",
+  "✨ The path is not hidden, only unchosen.",
+  "⛈️ Uncertainty is part of alignment.",
+  "💜 Choose what feels quiet inside.",
+  "🔮 The answer is already forming.",
+  "🌠 Not today, but soon.",
+  "🗝️ You already opened this door mentally."
+];
+
+/* MOOD SYSTEM (Idea 3) */
+function setMood(){
+  const moods = [
+    {bg:"radial-gradient(circle at top,#1a0b2e,#120a24 55%,#070510)"},
+    {bg:"radial-gradient(circle at top,#2a0b3a,#1a1230 55%,#080612)"},
+    {bg:"radial-gradient(circle at top,#120b2e,#0b0a1f 60%,#05040a)"}
+  ];
+
+  const m = moods[Math.floor(Math.random()*moods.length)];
+  document.body.style.background = m.bg;
+}
+
+/* =========================
+   CONSULT ORACLE (TRUST + MOOD)
+========================= */
+
+function consultOracle(){
+
+  setMood();
+
+  const text = document.getElementById("oracleText");
+  text.classList.add("fade");
+
+  setTimeout(()=>{
+
+    const pick = responses[Math.floor(Math.random()*responses.length)];
+
+    text.innerText = pick;
+    text.classList.remove("fade");
+
+  },300);
+
+  /* TRUST SYSTEM (Idea 5) */
+  trust++;
+  localStorage.setItem("zulaTrust", trust);
+
+  updateTrust();
+
+}
+
+/* =========================
+   TRUST DISPLAY
+========================= */
+
+function updateTrust(){
+
+  let msg = "";
+
+  if(trust < 10){
+    msg = "Trust Level: " + trust + "% — The Oracle observes.";
+  }
+  else if(trust < 30){
+    msg = "Trust Level: " + trust + "% — The Oracle listens.";
+  }
+  else if(trust < 60){
+    msg = "Trust Level: " + trust + "% — Alignment forming.";
+  }
+  else if(trust < 100){
+    msg = "Trust Level: " + trust + "% — The Oracle remembers you.";
+  }
+  else{
+    msg = "Trust Level: MAX — The Oracle shares forbidden wisdom.";
+  }
+
+  document.getElementById("trustMeter").innerText = msg;
+}
+
+updateTrust();
+
+/* =========================
+   WISDOM CONSTELLATION (Idea 6)
+========================= */
+
+const wisdom = [
+  "Rest is also movement.",
+  "Not every signal is meant to be followed.",
+  "You are not behind.",
+  "Some answers arrive slowly on purpose.",
+  "You already survived versions of this."
+];
+
+function revealWisdom(){
+
+  const pick = wisdom[Math.floor(Math.random()*wisdom.length)];
+
+  const text = document.getElementById("oracleText");
+
+  text.classList.add("fade");
+
+  setTimeout(()=>{
+    text.innerText = "⭐ " + pick;
+    text.classList.remove("fade");
+  },200);
+
+}
+
+</script>
+
+</body>
+</html>
