@@ -51,6 +51,7 @@ textarea{
     margin-top:20px;
     font-family:inherit;
     font-size:16px;
+    box-sizing:border-box;
 }
 
 button{
@@ -63,7 +64,11 @@ button{
     color:#120a24;
     font-weight:bold;
 }
-
+    .entry button{
+    margin-top:10px;
+    padding:8px 14px;
+    font-size:14px;
+}
 .entry{
     margin-top:20px;
     padding:15px;
@@ -74,6 +79,28 @@ button{
 .date{
     opacity:0.6;
     font-size:0.85em;
+}
+    #calendar{
+    display:grid;
+    grid-template-columns:
+      repeat(auto-fill,minmax(100px,1fr));
+
+    gap:10px;
+    margin-top:25px;
+    margin-bottom:25px;
+}
+
+.calendar-day{
+    background:rgba(255,255,255,0.08);
+    border-radius:12px;
+    padding:10px;
+    text-align:center;
+    cursor:pointer;
+}
+
+    .calendar-day:hover{
+    transform:scale(1.03);
+    box-shadow:0 0 12px rgba(199,166,255,0.5);
 }
 </style>
 </head>
@@ -105,6 +132,8 @@ button{
         Save Entry 🌙
     </button>
 
+    <h2>📅 Entry Calendar</h2>
+    <div id="calendar"></div>
     <div id="entries"></div>
 
 </div>
@@ -112,7 +141,53 @@ button{
 <script>
 
 function saveEntry(){
-   // your existing save code
+
+    const input =
+      document.getElementById("diaryInput");
+
+    const text = input.value.trim();
+
+    if(!text) return;
+
+    const entries =
+      JSON.parse(localStorage.getItem("diaryEntries")) || [];
+
+    entries.unshift({
+        date: new Date().toLocaleString(),
+        text: text
+    });
+
+    localStorage.setItem(
+        "diaryEntries",
+        JSON.stringify(entries)
+    );
+
+    input.value = "";
+
+    loadEntries();
+    buildCalendar();
+}
+    function editEntry(index){
+
+    const entries =
+      JSON.parse(localStorage.getItem("diaryEntries")) || [];
+
+    const updatedText = prompt(
+        "Edit your entry:",
+        entries[index].text
+    );
+
+    if(updatedText === null) return;
+
+    entries[index].text = updatedText;
+
+    localStorage.setItem(
+        "diaryEntries",
+        JSON.stringify(entries)
+    );
+
+    loadEntries();
+    buildCalendar();
 }
 
 function loadEntries(){
@@ -125,22 +200,77 @@ function loadEntries(){
 
     container.innerHTML = "";
 
-    entries.forEach(entry => {
-        container.innerHTML += `
-            <div class="entry">
-                <div class="date">
-                    ${entry.date}
-                </div>
-                <br>
-                ${entry.text}
+  entries.forEach((entry,index) => {
+    container.innerHTML += `
+        <div class="entry">
+
+            <div class="date">
+                ${entry.date}
+            </div>
+
+            <br>
+
+            <div class="entry-text">
+                ${entry.text.replace(/\n/g,"<br>")}
+            </div>
+
+            <button onclick="editEntry(${index})">
+                ✏️ Edit
+            </button>
+
+        </div>
+    `;
+ });
+    
+}
+/* 🌙 THIS is the magic line */
+
+function buildCalendar(){
+
+    
+    const calendar =
+      document.getElementById("calendar");
+
+    const entries =
+      JSON.parse(localStorage.getItem("diaryEntries")) || [];
+
+    calendar.innerHTML = "";
+
+    entries.forEach((entry,index)=>{
+
+        const date =
+          new Date(entry.date);
+
+        const day =
+          date.toLocaleDateString();
+
+        calendar.innerHTML += `
+            <div
+              class="calendar-day"
+              onclick="jumpToEntry(${index})">
+
+              📖<br>
+              ${day}
+
             </div>
         `;
     });
 }
+ function jumpToEntry(index){
 
-/* 🌙 THIS is the magic line */
-window.onload = loadEntries;
+    const cards =
+      document.querySelectorAll(".entry");
 
+    if(cards[index]){
+        cards[index].scrollIntoView({
+            behavior:"smooth"
+        });
+    }
+}
+    window.onload = () => {
+    loadEntries();
+    buildCalendar();
+};
 </script>
 
 </body>
